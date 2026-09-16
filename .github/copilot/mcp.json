@@ -2,9 +2,11 @@
   "mcpServers": {
     "rulebook": {
       "command": "node",
-      "args": ["./scripts/rulebook-mcp-server/index.js"],
+      "args": [
+        "scripts/rulebook-mcp-server/index.js"
+      ],
       "env": {
-        "RULEBOOK_PATH": "./central-rulebook/rules"
+        "RULEBOOK_PATH": "central-rulebook/rules/guidelines.md"
       }
     }
   }
