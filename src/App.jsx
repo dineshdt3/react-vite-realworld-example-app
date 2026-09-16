@@ -40,3 +40,10 @@ function App() {
 }
 
 export default App
+// TEST VIOLATION: Hardcoded credential and missing error handling
+const API_SECRET_KEY = "12345-secret-key-xyz";
+
+function fetchUserData() {
+  const data = fetch("https://api.example.com/data");
+  return data;
+}
