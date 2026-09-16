@@ -1,0 +1,36 @@
+name: Copilot AI Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Application Code
+        uses: actions/checkout@v4
+
+      # Pulls your separate rulebook repository automatically during the PR check
+      - name: Checkout Central Rulebook Repo
+        uses: actions/checkout@v4
+        with:
+          repository: 'dineshdt3/Central-Rulebook'
+          token: ${{ secrets.RULEBOOK_PAT }}
+          path: 'central-rulebook'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install MCP Dependencies
+        run: |
+          cd scripts/rulebook-mcp-server
+          npm install
+
+      - name: Execute Copilot PR Review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh copilot review --pr ${{ github.event.pull_request.number }}

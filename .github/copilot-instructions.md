@@ -1,0 +1,1 @@
+When performing code reviews on Pull Requests, always execute the tool `get_code_review_rules` provided by the MCP server to fetch central rulebook guidelines and flag any violations.
